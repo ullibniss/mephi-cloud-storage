@@ -1,0 +1,17 @@
+{% extends 'cloud/base.html' %}
+
+{% block content %}
+<h1>{{title}}</h1>
+
+<form method="post">
+    {% csrf_token %}
+<div style="max-width: 50%">
+{% for f in form %}
+<p><label class="form-label" for="{{ f.id_for_label }}">{{f.label}}: </label>{{ f }}</p>
+<div class="form-error">{{ f.errors }}</div>
+{% endfor %}
+</div>
+    <button class="btn btn-primary" type="submit">Register</button>
+</form>
+
+{% endblock %}

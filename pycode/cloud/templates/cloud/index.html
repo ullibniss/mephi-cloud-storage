@@ -1,0 +1,39 @@
+{% extends 'cloud/base.html' %}
+
+{% block content %}
+{% if documents %}
+		<div style="max-width: 50%">
+        
+        <form action="{% url 'delete' %}" method="post" enctype="multipart/form-data">
+            {% csrf_token %}
+            <ul class="list-group">
+            {% for document in documents %}
+                <li class="list-group-item">
+                    <input class="form-check-input me-1" type="checkbox" name="{{ document.docfile.name }}" id="Checkbox-{{ document.docfile.name }}">        
+                    <a href="{{ document.docfile.url }}">{{ document.docfile.name }}</a>
+                </li>
+            {% endfor %}
+            </ul>
+            <br>
+            <p><input class="btn btn-danger" name="delete" type="submit" value="Delete" /></p>
+        </form>
+        
+	</div>
+    {% else %}
+        <p>No documents.</p>
+    {% endif %}
+		<div >
+        <form action="{% url 'home' %}" method="post" enctype="multipart/form-data">
+			
+            {% csrf_token %}
+            <p>{{ form.non_field_errors }}</p>
+            <p>{{ form.docfile.label_tag }} {{ form.docfile.help_text }}</p>
+            <p>
+                {{ form.docfile.errors }}
+                <label for="id_docfile" class="mb-3 form-label"/>
+					{{ form.docfile }}
+            </p>
+            <p><input class="btn btn-primary" type="submit" value="Upload" /></p>
+        </form>
+	</div>
+{% endblock %}

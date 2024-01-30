@@ -2,8 +2,8 @@ FROM python:3.10
 
 RUN mkdir -p /app
 WORKDIR /app
-COPY ./requirements.txt ./
- 
+
+COPY ./requirements.txt ./ 
 RUN pip install --no-cache -r requirements.txt
 
 COPY ./pycode/ ./
